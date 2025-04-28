@@ -81,8 +81,8 @@
   _**java.lang.Thread**_ class and _**java.lang.Runnable**_ interface.
 - When a Java program starts, one thread begins running immediately, which is called the main thread. This thread is
   responsible for executing the main method of a program.
-- Example - 
-  - ```java
+
+    ```java
     public class Main {
         public static void main(String[] args) {
             System.out.println("Namaste! Java");
@@ -90,9 +90,72 @@
         }
     }
     ```
-  - ```shell
+
+    ```shell
     Namaste! Java
     main
     
     Process finished with exit code 0
     ```
+
+### 3. Java Threads Made SUPER EASY! 🔥 2 Ways to Create Threads
+
+- To create a new thread in Java, you can either extend the Thread class or implement the Runnable interface.
+
+    ```java
+    public class Main {
+        public static void main(String[] args) {
+            World world = new World();
+            world.start();
+            while (true) {
+                System.out.println(Thread.currentThread().getName());
+            }
+        }
+    }
+    
+    class World extends Thread {
+    @Override
+        public void run() {
+            while (true) {
+                System.out.println(Thread.currentThread().getName());
+            }
+        }            
+    }
+    ```
+
+- A new class World is created that extends Thread.
+- The run method is overridden to define the code that constitutes the new thread.
+- start method is called to initiate the new thread.
+
+    ```java
+    public class Main {
+        public static void main(String[] args) {
+            World world = new World();
+            Thread thread = new Thread(world);
+            thread.start();
+            while (true) {
+                System.out.println(Thread.currentThread().getName());
+            }
+        }
+    }
+    
+    class World implements Runnable {
+        @Override
+        public void run() {
+            while (true) {
+                System.out.println(Thread.currentThread().getName());
+            }
+        }
+    }
+    ```
+
+- To create a new thread in Java, you can either extend the Thread class or implement the Runnable interface.
+- A new class World is created that implements Runnable.
+- The run method is overridden to define the code that constitutes the new thread.
+- A Thread object is created by passing an instance of MyRunnable.
+- start method is called on the Thread object to initiate the new thread.
+
+### 4. Java Thread Lifecycle EXPLAINED! 🚀
+
+
+  
