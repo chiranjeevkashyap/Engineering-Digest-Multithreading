@@ -1,5 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        Thread thread = new Thread();
+        System.out.println("Namaste! Java");
+        System.out.println(Thread.currentThread().getName());
     }
 }

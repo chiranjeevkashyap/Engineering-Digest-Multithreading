@@ -49,13 +49,50 @@
     - **Purpose:** This allows multiple processes and threads to share the CPU, giving the appearance of simultaneous
       execution on a single-core CPU or improving parallelism on multicore CPUs.
 - Multitasking -
-  - Multitasking can be archived through multithreading where each task is divided into threads that are managed concurrently.
-  - Multitasking operates at the level of processes, which are the operating system's primary units of execution.
-  - Multitasking involves managing resources between completely separate programs, which may have independent memory spaces and system resources.
-  - Multitasking allows us to run multiple applications simultaneously, improving productivity and system utilization.
+    - Multitasking can be archived through multithreading where each task is divided into threads that are managed
+      concurrently.
+    - Multitasking operates at the level of processes, which are the operating system's primary units of execution.
+    - Multitasking involves managing resources between completely separate programs, which may have independent memory
+      spaces and system resources.
+    - Multitasking allows us to run multiple applications simultaneously, improving productivity and system utilization.
 
-- Multithreading - 
-  - While multitasking typically refers to the running of multi applications, multithreading is more granular, dealing with multiple threads within the same application or process.
-  - Multithreading operates at the level of threads, which are smaller units within a process.
-  - Multithreading involves managing resources within a single program, where threads share the same memory and resources.
-  - Multithreading allows a single application to perform multiple tasks at the same time, improving application performance and responsiveness.
+- Multithreading -
+    - While multitasking typically refers to the running of multi applications, multithreading is more granular, dealing
+      with multiple threads within the same application or process.
+    - Multithreading operates at the level of threads, which are smaller units within a process.
+    - Multithreading involves managing resources within a single program, where threads share the same memory and
+      resources.
+    - Multithreading allows a single application to perform multiple tasks at the same time, improving application
+      performance and responsiveness.
+
+### 2. How JVM handles multithreading?
+
+- Java provides robust support for multithreading, allowing developers to create applications that can perform multiple
+  task simultaneously, improving performance and responsiveness.
+- In Java, multithreading is the concurrent execution of two or more threads to maximize the utilization of the CPU.
+  Java's multithreading capabilities are part of the _**java.lang.package**_, making it easy to implement concurrent
+  execution.
+- In a single-core environment, Java's multithreading is managed by the JVM and the OS, which switch between threads to
+  give the illusion of concurrency.
+- The threads share the single core and time-slicing is used to manage thread execution.
+- In multicore environment, Java's multithreading can take full advantage of the available cores.
+- The JVM can distribute threads across multiple cores, allowing true parallel execution of threads.
+- A thread is a lightweight process, the smallest unit of processing. Java supports multithreading through its
+  _**java.lang.Thread**_ class and _**java.lang.Runnable**_ interface.
+- When a Java program starts, one thread begins running immediately, which is called the main thread. This thread is
+  responsible for executing the main method of a program.
+- Example - 
+  - ```java
+    public class Main {
+        public static void main(String[] args) {
+            System.out.println("Namaste! Java");
+            System.out.println(Thread.currentThread().getName());
+        }
+    }
+    ```
+  - ```shell
+    Namaste! Java
+    main
+    
+    Process finished with exit code 0
+    ```
