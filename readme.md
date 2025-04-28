@@ -157,5 +157,36 @@
 
 ### 4. Java Thread Lifecycle EXPLAINED! 🚀
 
+- The lifecycle of a thread in Java consists of several states, which a thread can move through during its execution.
+    - **New:** A thread is in this state when it is created but not yet started.
+    - **Runnable:** After the start method is called, the thread becomes runnable. It's ready to run and is waiting for
+      CPU time.
+    - **Running:** The thread is in this state when it is executing.
+    - **Blocked/Waiting:** A thread is in this state when its is waiting for resources or for another thread to perform
+      an action.
+    - **Terminated:** A thread is in this state when it has finished executing.
 
+  ```java
+  public class MyThread extends Thread {
+      @Override
+      public void run() {
+          System.out.println("RUNNING");
+          try {
+              Thread.sleep(200);
+          } catch (InterruptedException e) {
+              throw new RuntimeException(e);
+          }
+      }
   
+      public static void main(String[] args) throws  InterruptedException {
+          MyThread thread = new MyThread();
+          System.out.println(thread.getState());
+          thread.start();
+          System.out.println(thread.getState());
+          Thread.sleep(100);
+          System.out.println(thread.getState());
+          thread.join();
+          System.out.println(thread.getState());
+      }
+  }
+  ```
