@@ -190,3 +190,13 @@
       }
   }
   ```
+  
+### 5. Java Thread vs Runnable: The SHOCKING Truth!
+
+- extends Thread → Inherits the Thread class; your class is a thread.
+- implements Runnable → Provides code for a thread; your class is not a thread, only a task.
+- Using Runnable is preferred because Java allows only one class to be extended (single inheritance).
+
+### 6. Master Java Threads: Essential Methods to Elevate Your Coding!
+
+- 
