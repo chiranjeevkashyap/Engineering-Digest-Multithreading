@@ -351,4 +351,101 @@ public class MyThread extends Thread {
   
 ### 7. Master Synchronization & the synchronized Keyword
 
-- 
+- synchronized method
+```java
+public class Counter {
+    private int count;
+
+    // synchronized method
+    public synchronized void increment() {
+        count++;
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+
+class MyThread extends Thread {
+    final private Counter counter;
+
+    public MyThread(Counter counter) {
+        this.counter = counter;
+    }
+
+    public static void main(String[] args) {
+        final Counter counter = new Counter();
+        MyThread myThread1 = new MyThread(counter);
+        MyThread myThread2 = new MyThread(counter);
+        myThread1.start();
+        myThread2.start();
+        try {
+            myThread1.join();
+            myThread2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Counter count is: " + counter.getCount());
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 1000; i++) {
+            counter.increment();
+        }
+    }
+}
+```
+
+- synchronized block
+```java
+public class Counter {
+    private int count;
+
+    public void increment() {
+        // synchronized block
+        synchronized (this) {
+            count++;
+        }
+    }
+
+    public int getCount() {
+        return count;
+    }
+}
+
+class MyThread extends Thread {
+    final private Counter counter;
+
+    public MyThread(Counter counter) {
+        this.counter = counter;
+    }
+
+    public static void main(String[] args) {
+        final Counter counter = new Counter();
+        MyThread myThread1 = new MyThread(counter);
+        MyThread myThread2 = new MyThread(counter);
+        myThread1.start();
+        myThread2.start();
+        try {
+            myThread1.join();
+            myThread2.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("Counter count is: " + counter.getCount());
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 1000; i++) {
+            counter.increment();
+        }
+    }
+}
+```
+
+- Mutual Exclusion - It's a concept in concurrent programming where only one thread or process can access a shared resource (like a variable, file, or critical section) at a time, to prevent data inconsistency or race conditions. 
+
+### 8. 🔒 Java Locks Explained! Why Senior Developers LOVE ReentrantLock
+
