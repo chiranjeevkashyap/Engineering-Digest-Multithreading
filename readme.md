@@ -190,7 +190,7 @@
       }
   }
   ```
-  
+
 ### 5. Java Thread vs Runnable: The SHOCKING Truth!
 
 - extends Thread → Inherits the Thread class; your class is a thread.
@@ -198,5 +198,157 @@
 - Using Runnable is preferred because Java allows only one class to be extended (single inheritance).
 
 ### 6. Master Java Threads: Essential Methods to Elevate Your Coding!
+
+- run: Contains the code that defines the task to be executed by the thread.
+```java
+public class MyThread extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println("RUNNING");
+        }
+    }
+}
+```
+
+- start: Begins a new thread by calling its `run()` method internally.
+```java
+public class MyThread extends Thread {
+    public static void main(String[] args) throws InterruptedException {
+        MyThread thread = new MyThread();
+        thread.start();
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println("RUNNING");
+        }
+    }
+
+}
+```
+
+- sleep: Temporarily pauses the current thread for a specified time.
+```java
+public class MyThread extends Thread {
+    public static void main(String[] args) throws InterruptedException {
+        MyThread thread = new MyThread();
+        thread.start();
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("RUNNING");
+        }
+    }
+}
+```
+
+- join: Makes the current thread wait until the specified thread has finished execution.
+```java
+public class MyThread extends Thread {
+    public static void main(String[] args) throws InterruptedException {
+        MyThread thread = new MyThread();
+        thread.start();
+        thread.join();
+        System.out.println("Exit.");
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("RUNNING");
+        }
+    }
+}
+```
+
+- setPriority: Sets the priority level of a thread to influence the thread scheduling.
+```java
+public class MyThread extends Thread {
+    public MyThread(String name) {
+        super(name);
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        MyThread myThread = new MyThread("MyThread");
+        myThread.setPriority(Thread.MAX_PRIORITY);
+        myThread.start();
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Name: " + Thread.currentThread().getName() + ", Priority: " + Thread.currentThread().getPriority() + ", count: " + i);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+}
+```
+
+- yield: Pauses the current thread to allow other threads of the same priority to execute.
+```java
+public class MyThread extends Thread {
+    public MyThread(String name) {
+        super(name);
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        MyThread myThread1 = new MyThread("T1");
+        myThread1.start();
+        MyThread myThread2 = new MyThread("T2");
+        myThread2.start();
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0 ; i < 5 ; i++) {
+            System.out.println(Thread.currentThread().getName() + " is running.");
+            Thread.yield();
+        }
+    }
+}
+```
+
+- setDaemon: Marks a thread as a daemon thread, which automatically ends when all user threads finish.
+```java
+public class MyThread extends Thread {
+    public MyThread(String name) {
+        super(name);
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        MyThread thread = new MyThread("T1");
+        thread.setDaemon(true);
+        thread.start();
+        System.out.println("Main Done.");
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            System.out.println("Namaste! Daemon.");
+        }
+    }
+}
+```
+  
+### 7. Master Synchronization & the synchronized Keyword
 
 - 
