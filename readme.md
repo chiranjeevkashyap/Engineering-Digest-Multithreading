@@ -449,3 +449,17 @@ class MyThread extends Thread {
 
 ### 8. 🔒 Java Locks Explained! Why Senior Developers LOVE ReentrantLock
 
+- Lock - A lock is a synchronization mechanism used to control access to a shared resource in multithreaded programming. It allows only one thread to access the resource at a time, ensuring mutual exclusion. In Java, locks can be implemented using:
+  - `synchronized` blocks/methods
+  - `ReentrantLock` from `java.util.concurrent.locks`
+
+- Locks are 2 types
+  1. Intrinsic - These are build into every object in Java. You don't see them, but they're there. When you used a synchronized keyword, you're using these automatic locks.
+  2. Explicit - These are more advanced locks you can control yourself using the Lock class from `java.util.concurrent.locks`. You explicitly say when to lock and unlock, giving you more control over how and when user can use the resources. 
+
+- Lock methods -
+  1. `lock()`: Acquires the lock, blocking the current thread indefinitely until it is available.
+  2. `tryLock()`: Attempts to acquire the lock immediately; returns `true` if successful, otherwise `false`.
+  3. `tryLock(long time, TimeUnit unit)`: Tries to acquire the lock within the specified waiting time; returns `true` if successful before timeout.
+  4. `unlock()`: Releases the lock held by the current thread, allowing others to acquire it.
+  5. `lockInterruptibly()`: Acquires the lock unless the current thread is interrupted while waiting, in which case it throws `InterruptedException`.
